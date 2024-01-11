@@ -27,3 +27,4 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::view('/SPA','viewSpa')->name('viewSpa');

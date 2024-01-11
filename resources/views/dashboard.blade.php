@@ -8,19 +8,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                {{--
-               @livewire('formulario')
 
-
-            <div class="mt-8">
-                @livewire('comments')
-            </div>
-            --}}
-                @livewire('father')
-                <hr class="my-6">
-
-                @livewire('fatherBidirecional')
             </div>
         </div>
+        <div class="mx-6">
+            @livewire('father')
+        </div>
+
+
     </div>
 </x-app-layout>

@@ -12,8 +12,19 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"
+                                :active="request()->routeIs('dashboard')"
+                                wire:navigate>
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                        {{--      :active="request()->routeIs('dashboard')"
+                                wire:navigate>
+                                REALIZA PETICIONES EN SEGUNDO PLANO, CON ESTO LOGRAMOS QUE LIVEWIRE NO RENDERIZA LA PAGINAS,
+                                HASTA QUE HALLA CARGADO TODOS LOS COMPONENTES
+                                --}}
+
+                    <x-nav-link href="{{ route('viewSpa') }}" :active="request()->routeIs('viewSpa')" wire:navigate>
+                                Prueba de SPA
                     </x-nav-link>
                 </div>
             </div>
