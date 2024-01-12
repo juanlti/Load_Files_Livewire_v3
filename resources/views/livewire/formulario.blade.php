@@ -3,6 +3,10 @@
 
     <div class="bg-white shadow rounded-lg p-6 mb-8">
 
+        @if($postCreateForm->image)
+            <img src="{{$postCreateForm->image->temporaryUrl()}}" alt="">
+
+        @endif
         <form wire:submit.prevent="save">
 
             <div class="mb-4">
@@ -34,10 +38,35 @@
                 <x-input-error for="postCreateForm.content"/>
             </div>
             {{-- secion  02 del formulario --}}
+            <div class="mb-4">
+                <x-label for="" class="my-3">
+                    Imagen
+
+                </x-label>
+                {{-- Indicador de progreso de la carga de datos --}}
+                <div
+                    x-data="{ uploading: false, progress: 0 }"
+                    x-on:livewire-upload-start="uploading = true"
+                    x-on:livewire-upload-finish="uploading = false"
+                    x-on:livewire-upload-error="uploading = false"
+                    x-on:livewire-upload-progress="progress = $event.detail.progress"
+                >
+                    <!-- File Input -->
+
+
+                    <input type="file" wire:model="postCreateForm.image"
+                           wire:key="{{$postCreateForm->imageKey}}"></input>
+                    <!-- Progress Bar -->
+                    <div x-show="uploading">
+                        {{-- Personalziacion--}}
+                        <div x-text="progress"></div>
+                        <progress max="100" x-bind:value="progress"></progress>
+                    </div>
+                </div>
+            </div>
             <div class="mb-4 ">
-
                 <label for="">
-
+                    Categoria
                     <x-select class="w-full" wire:model.live="postCreateForm.category_id">
 
                         <option value="" disabled {{ $postCreateForm->category_id ? 'hidden' : '' }} hidden>Selecione

@@ -11,10 +11,6 @@
 
             </div>
         </div>
-        <div class="mx-6">
-            @livewire('father')
-        </div>
-
-
+        @livewire('formulario')
     </div>
 </x-app-layout>

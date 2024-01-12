@@ -8,13 +8,15 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 
 class Formulario extends Component
 {
 
 
-
+    //requisito para trabajar con imagenes en livewire 3
+    use WithFileUploads;
 
     public  $categories,$tags;
     public $is_published,$image_path;
@@ -91,7 +93,7 @@ class Formulario extends Component
 
 public function updated($property,$value){
     /// updated => ACTUALIZA LOS VALORES EN LA BD, MODIFICAR EL TIPO DE LETRAS, NO RECOMENDADO PARA  VALIDAR
-    dd($value);
+  //  dd($value);
 }
 public function hydrate(){
     // de back a front => hydrata el objecto
