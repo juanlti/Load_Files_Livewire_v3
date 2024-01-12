@@ -100,7 +100,7 @@
                             </label>
                         </li>
                     @endforeach
-
+                        {{-- --}}
 
                 </ul>
                 <x-input-error for="postCreateForm.tags"/>
@@ -108,14 +108,33 @@
 
 
             <div class="flex justify-end">
-                <x-button>
-                    Guardar Datos
+                {{--
+              MIENTRAS DURE EL PROCESO DE CARGA, EL BOTON TIENE UNA OPACIDAD,  AL FINALIZAR VUELVE A SU ESTADO ORIGINAL
+                <x-button wire:loading.class="opacity-25">
+                    {{-- MIENTRAS DURE EL PROCESO DE CARGA, EL BOTON SE QUITA (O DESABILITAR) EL COMPONENTE, AUTOMATICAMENTE SE QUITA AL FINALIZAR
+                 {{--   <x-button wire:loading.class.remove="opacity-25">
+                            {{-- Este ultmo, es diferente a kis 2 botones anteriores
+                        {{-- Queda a la vista pero se essconde al fianlizar la accion,--}}
 
-                </x-button>
+                {{--  <x-button wire:loading.class.attr="disabled">--}}
 
+                   <x-button class="justify-between" wire:loading.class.delay>
+                       {{-- un tiempo extral para el modal de  barra--}}
+                                    <div>Guardar</div>
+
+
+                        </x-button>
+                {{--     </x-button> --}}
+      {{--  </x-button> --}}
             </div>
 
         </form>
+        <div wire:loading wire:target="save">Procesando...</div>
+        {{-- Aparece con la accin del button save --}}
+        {{--<div wire:loading wire:target="save">Procesando...</div> --}}
+        {{-- Desaparece con la accin del button save --}}
+        {{--<div wire:loading.remove wire:target="save">Procesando...</div> --}}
+
     </div>
 
 
