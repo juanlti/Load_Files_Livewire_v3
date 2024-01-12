@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 
 class Formulario extends Component
@@ -16,7 +17,10 @@ class Formulario extends Component
 
 
     //requisito para trabajar con imagenes en livewire 3
-    use WithFileUploads;
+    use WithPagination;
+
+    // paquinacion, paquete requerudi
+    use WithPagination;
 
     public  $categories,$tags;
     public $is_published,$image_path;
@@ -24,7 +28,8 @@ class Formulario extends Component
     // CLASE POSTCREATEFORM
     //Creacion de un objeto tipo postCreateForm
     public PostCreateForm $postCreateForm;
-    public $posts;
+   // public $posts; La propiedad $posts y los metodos de acceso $this->posts=Post::all();  CON EL ULTIMO CAMBIO, NO SON NECESARIOS
+    // porque el metodo render, va a ejecutar la consulta, cada vez que un componente es accionado
 
 
     //CLASE POSTEDITFORM
@@ -60,7 +65,7 @@ class Formulario extends Component
     public function update(){
 
         $this->postEditForm->update();
-        $this->posts=Post::all();
+       // $this->posts=Post::all();
 
         $this->dispatch('post-created','Articulo actualizado');
     }
@@ -116,16 +121,24 @@ public function dehydrate(){
 
         //dd($this->tags);
         //CARGAMOS TODOS LOS POST
-        $this->posts=Post::all();
+       // $this->posts=Post::all();
 
 
+    }
+
+    public function paginationView(){
+    return 'vendor.livewire.simple-tailwind';
     }
     public function save(){
 
         //llamo al objecto de la instancia PostCreateForm y ejecuto su metodo save()
         $this->postCreateForm->save();
 
-        $this->posts=Post::all();
+
+        //$this->posts=Post::all();
+
+        //RESETEAMOS EL INDICE DE LA PAGINACIONA A 1
+        $this->resetPage(pageName:'pagePosts');
 
         //EMITO UN EVENTO, TIPO DE EVENTO 'dispatch'
         //este evento puede ser escuchado por un hijo o padre.
@@ -141,7 +154,7 @@ public function dehydrate(){
         //aplico el metodo delete al objeto a eliminar
         $postDelete->delete();
         //actualizo la lista
-        $this->posts=Post::all();
+        //$this->posts=Post::all();
         $this->dispatch('post-created','Articulo Eliminado');
 
     }
@@ -151,7 +164,12 @@ public function dehydrate(){
 
  public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
  {
-     return view('livewire.formulario');
+     //METODO RENDER() SE EJECUTA POR CADA ACCION DE ALGUN COMPONENTE DE LIVEWIRE
+     //Historial de post paginados
+     //$posts contiene paginas de 5 en 5
+     $posts=Post::orderBy('id','desc')->paginate(5,pageName:'pagePosts');
+     //$posts=Post::paginate(5);
+     return view('livewire.formulario',compact('posts'));
  }
 
 }

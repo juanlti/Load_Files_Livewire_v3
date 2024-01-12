@@ -168,7 +168,14 @@
 
 
         </ul>
+            <div class="mt-4">
+                {{-- PAGINACION POR DEFECTO--}}
+                    {{$posts->links()}}
+                {{-- OTRA  PAGINACION, INDICAMOS LA RUTA--}}
+               {{-- {{$posts->links('vendor.livewire.simple-tailwind')}} --}}
 
+
+            </div>
     </div>
 
 
