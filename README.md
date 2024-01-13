@@ -10,6 +10,3 @@
 ## About Laravel
 
 
-
-COMUNICACION ENTRE COMPONENTES DE MANERA DIRECIONAL Y BIDIRECCIONAL
-![image](https://github.com/juanlti/LiveWire3_CRUD_FORM/assets/47389717/ca6f2004-db48-423d-aa95-e9feed0ba96c)
