@@ -140,7 +140,15 @@
 
     {{--  {{"nombre del formulario".$formularioNombre}}  --}}
     <div class="bg-white shadow rounded-lg p-6 mt-4">
+        {{-- BUSCADOR CON RESULTADO AUTOMATICO--}}
+        <div class="mb-4">
+            <x-input class="w-full" placeholder="Buscar.." wire:model.live="searchPost"/>
+
+        </div>
+        {{-- FIN BUSCADOR CON RESULTADO AUTOMATICO--}}
+
         <ul class="list-disc list-inside space-y-2"> {{--Lista  --}}
+
             @foreach($posts as $post)
                 <li class="flex justify-between" wire:key="post--{{$post->id}}">
                     {{-- CORRECTO FUNCIONAMIENTO DE RENDERIZADO PARA UNA COLECCION QUE VA SE ACTUALIZANDO EN TODO MOMENTO--}}

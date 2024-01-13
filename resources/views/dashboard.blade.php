@@ -11,6 +11,15 @@
 
             </div>
         </div>
-        @livewire('formulario')
+        {{--
+        <livewire:formulario/>
+        <div class="mt-8">
+            @livewire('comments')
+        </div>
+        --}}
+        <div class="max-w-md mx-auto">
+            @livewire('computed-component')
+        </div>
+
     </div>
 </x-app-layout>

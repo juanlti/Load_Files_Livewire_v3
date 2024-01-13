@@ -7,6 +7,7 @@ use App\Livewire\Forms\PostEditForm;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -37,6 +38,11 @@ class Formulario extends Component
     //Edicion de un objeto tipo postEditForm
 
 
+
+    //   #[Url]  PERSISTENCIA DE DATOS EN LA URL ( el contenido de searchpost se muestra en la url )
+ //    #[Url(as: 's')] PERSISTENCIA DE DATOS EN LA URL ( el contenido de searchpost se muestra en la url  + recnombar la variable del contenido a buscar )
+    #[Url(as: 's')]
+    public $searchPost='';
 
     /**
      *
@@ -126,9 +132,12 @@ public function dehydrate(){
 
     }
 
-    public function paginationView(){
+    /*
+    public function paginationView(): string
+    {
     return 'vendor.livewire.simple-tailwind';
     }
+*/
     public function save(){
 
         //llamo al objecto de la instancia PostCreateForm y ejecuto su metodo save()
@@ -167,7 +176,11 @@ public function dehydrate(){
      //METODO RENDER() SE EJECUTA POR CADA ACCION DE ALGUN COMPONENTE DE LIVEWIRE
      //Historial de post paginados
      //$posts contiene paginas de 5 en 5
-     $posts=Post::orderBy('id','desc')->paginate(5,pageName:'pagePosts');
+     $posts=Post::orderBy('id','desc')
+         ->when($this->searchPost,function($query){
+             //funcion a ejecutar si existe un valor en searchPost
+             $query->where('title','like','%' . $this->searchPost . '%');
+        }) ->paginate(5,pageName:'pagePosts');
      //$posts=Post::paginate(5);
      return view('livewire.formulario',compact('posts'));
  }
